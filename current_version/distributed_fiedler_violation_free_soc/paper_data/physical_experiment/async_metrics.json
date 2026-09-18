@@ -1,0 +1,37 @@
+{
+  "generated_by": "plot_async_physical_experiment.py",
+  "implementation_claim": "independently clocked direct-peer distributed control; each robot locally filters peer state by distance and receive age; the supervisor neither triggers nor waits for control cycles",
+  "metrics": {
+    "agent_samples": {
+      "car_1": 193,
+      "car_2": 200,
+      "car_3": 192,
+      "car_4": 184
+    },
+    "local_degradation_reports": 7,
+    "maximum_local_cycle_wall_time_ms": 8.538550000139367,
+    "maximum_tracking_error_m": 0.061358833675208856,
+    "minimum_cycle_aligned_reconstructed_lambda2": 0.6356495281021054,
+    "minimum_cycle_aligned_reference_lambda2": 0.3653720954308018,
+    "minimum_observed_geofence_margin_m": 0.2815582752227783,
+    "minimum_observed_separation_m": 1.070640991215029,
+    "minimum_reported_local_soc_margin": -7.54429426397554e-13,
+    "minimum_supervisor_lambda2": 0.6341729865610092,
+    "missing_cycle_reports_interpolated_for_figures": 31,
+    "retained_neighbor_sets": [
+      "[\"car_1\",\"car_3\"]",
+      "[\"car_2\",\"car_4\"]"
+    ],
+    "run_reason": "40 s control window ended without LOCAL_COMPLETE from ['car_4']; telemetry_samples={car_1:193, car_2:200, car_3:192, car_4:184}",
+    "run_result": "ABORTED",
+    "tracking_rmse_m": 0.015631053005012403
+  },
+  "schema_version": 1,
+  "source_run": "C:\\Users\\twx\\Documents\\BaiduSyncdisk\\Document\\TW_doc\\My_Papers\\Fiedler-Subspace\\\u6700\u65b0\u5b9e\u7269\u5b9e\u9a8c\\\u52a8\u6355\u6570\u636e\u8bb0\u5f55\\run_20260821_194553_719606(\u5b9e\u673a\u5b9e\u9a8c)",
+  "source_sha256": {
+    "config.json": "f2f47b77462e4d5b9edbfb009b3101733da6c3d79e361362ff4a72a3e45a0444",
+    "events.csv": "d3092bc728258c6b53d69a0cb25edd9cecf4cdb4186e0f9a00a201206a3dc227",
+    "summary.json": "4b97c0059b14395d4eb08e1187acd3ddf2e15de28d09e8203a8e8eeb8de01aa5",
+    "timeseries.csv": "6076bc18b0a8efce15e703b0bb653700828723e07c64733e6148763dcbe243c4"
+  }
+}

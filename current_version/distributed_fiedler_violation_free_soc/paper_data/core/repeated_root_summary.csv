@@ -1,0 +1,25 @@
+metric,value
+lambda2 frozen,0.21420324586304035
+lambda3 frozen,0.21420324586304054
+absolute repeated-root gap,1.942890293094024e-16
+active channel-induced edges,6.0
+minimum local Slater diagnostic gamma_i_star,0.001253887700699949
+maximum local Slater diagnostic gamma_i_star,0.001253887700699953
+central objective,0.12331152692313989
+nominal-to-central control correction,0.49661157240471127
+central exact matrix margin,0.0
+rotated-basis centralized-control difference,8.382515861022226e-09
+initial control error to central,99.34194396511218
+final control error to central,4.15228363790364e-09
+initial objective gap,4967.480073223688
+final objective gap,2.220446049250313e-16
+minimum exact matrix margin over all iterates,3.686287386450715e-17
+final master residual eta_q,7.168687108065112e-07
+maximum resource zero-sum error,2.830524433501838e-16
+total active resource projections,183.0
+maximum resource-state norm,1.0000000000000002
+central dual norm,53.89659306428038
+consensus step,0.1
+resource step initial value,0.0005
+resource step exponent,0.6
+resource projection radius,1.0

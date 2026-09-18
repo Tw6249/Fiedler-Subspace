@@ -1,0 +1,49 @@
+# Generated files and local tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+
+# Research workspace and build products
+tmp/
+**/tmp/
+**/build/
+**/dist/
+**/pdf_qa/
+.codex/
+.paper-control/
+
+# Large/raw media and sensor recordings
+*.mp4
+*.mov
+*.avi
+*.db3
+*.bag
+**/rosbag/
+**/动捕数据记录/
+
+# Generated experiment outputs (keep source scripts and small summaries)
+**/outputs_*/
+**/example_output/
+*.npz
+*.pkl
+
+# Editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local archives and manuscript working files
+other/
+current_version/archive/
+current_version/TNSE_upload_final/
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.blg

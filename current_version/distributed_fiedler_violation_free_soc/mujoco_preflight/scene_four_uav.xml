@@ -1,0 +1,112 @@
+<mujoco model="four_uav_preflight">
+  <compiler angle="radian" coordinate="local"/>
+  <option timestep="0.005" gravity="0 0 -9.81" integrator="RK4"/>
+  <size nconmax="100" njmax="500"/>
+
+  <visual>
+    <global azimuth="135" elevation="-55" offwidth="960" offheight="720"/>
+    <quality shadowsize="2048"/>
+    <map znear="0.01" zfar="50"/>
+  </visual>
+
+  <asset>
+    <texture name="floor_tex" type="2d" builtin="checker" rgb1="0.88 0.90 0.92" rgb2="0.72 0.76 0.80" width="512" height="512"/>
+    <material name="floor_mat" texture="floor_tex" texrepeat="5 4" reflectance="0.05"/>
+    <material name="boundary_mat" rgba="0.92 0.70 0.08 1"/>
+    <material name="geofence_mat" rgba="0.12 0.48 0.22 0.62"/>
+    <material name="uav1_mat" rgba="0.84 0.25 0.08 1"/>
+    <material name="uav2_mat" rgba="0.00 0.45 0.70 1"/>
+    <material name="uav3_mat" rgba="0.00 0.58 0.40 1"/>
+    <material name="uav4_mat" rgba="0.52 0.34 0.66 1"/>
+    <material name="arm_mat" rgba="0.18 0.20 0.22 1"/>
+    <material name="start_mat" rgba="0.18 0.20 0.22 0.30"/>
+    <material name="goal1_mat" rgba="0.84 0.25 0.08 0.72"/>
+    <material name="goal2_mat" rgba="0.00 0.45 0.70 0.72"/>
+    <material name="goal3_mat" rgba="0.00 0.58 0.40 0.72"/>
+    <material name="goal4_mat" rgba="0.52 0.34 0.66 0.72"/>
+  </asset>
+
+  <worldbody>
+    <light name="key" pos="0 0 7" dir="0 0 -1" diffuse="0.85 0.85 0.85" castshadow="true"/>
+    <geom name="floor" type="plane" size="2.5 2 0.1" material="floor_mat" friction="0.8 0.02 0.01"/>
+    <geom name="boundary_x_pos" type="box" pos="2.48 0 0.012" size="0.02 2 0.012" material="boundary_mat" contype="0" conaffinity="0"/>
+    <geom name="boundary_x_neg" type="box" pos="-2.48 0 0.012" size="0.02 2 0.012" material="boundary_mat" contype="0" conaffinity="0"/>
+    <geom name="boundary_y_pos" type="box" pos="0 1.98 0.012" size="2.5 0.02 0.012" material="boundary_mat" contype="0" conaffinity="0"/>
+    <geom name="boundary_y_neg" type="box" pos="0 -1.98 0.012" size="2.5 0.02 0.012" material="boundary_mat" contype="0" conaffinity="0"/>
+    <geom name="geofence_x_pos" type="box" pos="2.10 0 0.018" size="0.009 1.60 0.006" material="geofence_mat" contype="0" conaffinity="0"/>
+    <geom name="geofence_x_neg" type="box" pos="-2.10 0 0.018" size="0.009 1.60 0.006" material="geofence_mat" contype="0" conaffinity="0"/>
+    <geom name="geofence_y_pos" type="box" pos="0 1.60 0.018" size="2.10 0.009 0.006" material="geofence_mat" contype="0" conaffinity="0"/>
+    <geom name="geofence_y_neg" type="box" pos="0 -1.60 0.018" size="2.10 0.009 0.006" material="geofence_mat" contype="0" conaffinity="0"/>
+    <geom name="start1" type="cylinder" pos="0.96 -0.56 0.014" size="0.065 0.006" material="start_mat" contype="0" conaffinity="0"/>
+    <geom name="start2" type="cylinder" pos="0.96 0.56 0.014" size="0.065 0.006" material="start_mat" contype="0" conaffinity="0"/>
+    <geom name="start3" type="cylinder" pos="-0.96 0.56 0.014" size="0.065 0.006" material="start_mat" contype="0" conaffinity="0"/>
+    <geom name="start4" type="cylinder" pos="-0.96 -0.56 0.014" size="0.065 0.006" material="start_mat" contype="0" conaffinity="0"/>
+    <camera name="top" pos="0 0 6.6" xyaxes="1 0 0 0 1 0" fovy="48"/>
+    <camera name="perspective" pos="4.2 -5.0 3.8" xyaxes="0.77 0.64 0 -0.29 0.35 0.89" fovy="50"/>
+
+    <body name="uav1" pos="0.96 -0.56 1.2">
+      <joint name="uav1_x" type="slide" axis="1 0 0" damping="0.004"/>
+      <joint name="uav1_y" type="slide" axis="0 1 0" damping="0.004"/>
+      <joint name="uav1_z" type="slide" axis="0 0 1" damping="0.006"/>
+      <geom type="box" size="0.085 0.055 0.025" mass="0.032" material="uav1_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 -0.13 0 0.13 0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 0.13 0 0.13 -0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+    </body>
+    <body name="uav2" pos="0.96 0.56 1.2">
+      <joint name="uav2_x" type="slide" axis="1 0 0" damping="0.004"/>
+      <joint name="uav2_y" type="slide" axis="0 1 0" damping="0.004"/>
+      <joint name="uav2_z" type="slide" axis="0 0 1" damping="0.006"/>
+      <geom type="box" size="0.085 0.055 0.025" mass="0.032" material="uav2_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 -0.13 0 0.13 0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 0.13 0 0.13 -0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+    </body>
+    <body name="uav3" pos="-0.96 0.56 1.2">
+      <joint name="uav3_x" type="slide" axis="1 0 0" damping="0.004"/>
+      <joint name="uav3_y" type="slide" axis="0 1 0" damping="0.004"/>
+      <joint name="uav3_z" type="slide" axis="0 0 1" damping="0.006"/>
+      <geom type="box" size="0.085 0.055 0.025" mass="0.032" material="uav3_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 -0.13 0 0.13 0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 0.13 0 0.13 -0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+    </body>
+    <body name="uav4" pos="-0.96 -0.56 1.2">
+      <joint name="uav4_x" type="slide" axis="1 0 0" damping="0.004"/>
+      <joint name="uav4_y" type="slide" axis="0 1 0" damping="0.004"/>
+      <joint name="uav4_z" type="slide" axis="0 0 1" damping="0.006"/>
+      <geom type="box" size="0.085 0.055 0.025" mass="0.032" material="uav4_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 -0.13 0 0.13 0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+      <geom type="capsule" fromto="-0.13 0.13 0 0.13 -0.13 0" size="0.008" mass="0.001" material="arm_mat" contype="0" conaffinity="0"/>
+    </body>
+
+    <body name="goal1" mocap="true" pos="0.96 -0.56 0.025">
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 0.785398" material="goal1_mat" contype="0" conaffinity="0"/>
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 -0.785398" material="goal1_mat" contype="0" conaffinity="0"/>
+    </body>
+    <body name="goal2" mocap="true" pos="0.96 0.56 0.025">
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 0.785398" material="goal2_mat" contype="0" conaffinity="0"/>
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 -0.785398" material="goal2_mat" contype="0" conaffinity="0"/>
+    </body>
+    <body name="goal3" mocap="true" pos="-0.96 0.56 0.025">
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 0.785398" material="goal3_mat" contype="0" conaffinity="0"/>
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 -0.785398" material="goal3_mat" contype="0" conaffinity="0"/>
+    </body>
+    <body name="goal4" mocap="true" pos="-0.96 -0.56 0.025">
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 0.785398" material="goal4_mat" contype="0" conaffinity="0"/>
+      <geom type="box" size="0.070 0.012 0.006" euler="0 0 -0.785398" material="goal4_mat" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="uav1_fx" joint="uav1_x" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav1_fy" joint="uav1_y" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav1_fz" joint="uav1_z" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav2_fx" joint="uav2_x" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav2_fy" joint="uav2_y" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav2_fz" joint="uav2_z" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav3_fx" joint="uav3_x" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav3_fy" joint="uav3_y" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav3_fz" joint="uav3_z" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav4_fx" joint="uav4_x" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav4_fy" joint="uav4_y" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+    <motor name="uav4_fz" joint="uav4_z" gear="1" ctrllimited="true" ctrlrange="-1.5 1.5"/>
+  </actuator>
+</mujoco>
